@@ -1,49 +1,96 @@
 <template>
-  <div>
-    <header class="site-header jumbotron">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            <h1>请发表对Vue的评论</h1>
-          </div>
-        </div>
-      </div>
-    </header>
-    <div class="container">
-      <Add :addComment="addComment" />
-      <List :comments="comments" :deleteComment="deleteComment" />
+  <div class="todo-container">
+    <div class="todo-wrap">
+      <!-- props通信方式 -->
+      <!-- <Header :addTodo="addTodo" /> -->
+
+      <!-- 自定义通信方式 -->
+      <!-- 简便方式 -->
+      <!-- <Header @addTodo="addTodo" /> -->
+      <!-- 复杂方式 -->
+      <Header ref="add" />
+
+      <Main :todos="todos" :updateOne="updateOne" :deleteOne="deleteOne" />
+
+      <!-- props通信方式 -->
+      <!-- <Footer :todos="todos" :chooseAll="chooseAll" :deleteFinished="deleteFinished" /> -->
+      <!-- 全局事件总线通信方式 -->
+      <Footer :todos="todos" :chooseAll="chooseAll" />
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import Add from "@/components/Add";
-import List from "@/components/List";
+import Header from "@/components/Header";
+import Main from "@/components/Main";
+import Footer from "@/components/Footer";
 export default {
   components: {
-    Add,
-    List
+    Header,
+    Main,
+    Footer
   },
+
+  // 自定义事件通信方式
+  mounted() {
+    this.$refs.add.$on("addTodo", this.addTodo);
+    // this.$refs.add.$once('addTodo', this.addTodo)// 一次性事件
+
+    // 全局事件总线通信方式
+    this.$bus.$on("deleteFinished", this.deleteFinished);
+  },
+
   data() {
     return {
-      comments: [
-        { id: 1, username: "agatha", content: "vue is great" },
-        { id: 2, username: "polly", content: "I prefer React" },
-        { id: 3, username: "steven", content: "awesome" },
-        { id: 4, username: "ash", content: "emmmmmm" }
-      ]
+      // todos: [
+      //   { id: 1, content: "火锅🍲", done: false },
+      //   { id: 2, content: "冰淇淋🍨", done: true },
+      //   { id: 3, content: "运动🏃", done: false }
+      // ]
+
+      todos: JSON.parse(localStorage.getItem("todos_key")) || []
     };
   },
   methods: {
-    addComment(obj) {
-      this.comments.unshift(obj);
+    updateOne(index, val) {
+      this.todos[index].done = val;
     },
-    deleteComment(index) {
-      this.comments.splice(index, 1);
+    addTodo(obj) {
+      this.todos.unshift(obj);
+    },
+    deleteOne(index) {
+      this.todos.splice(index, 1);
+    },
+    chooseAll(val) {
+      this.todos.forEach(item => (item.done = val));
+    },
+    deleteFinished() {
+      this.todos = this.todos.filter(item => !item.done);
+    }
+  },
+  watch: {
+    todos: {
+      deep: true,
+      handler(newVal, oldVal) {
+        localStorage.setItem("todos_key", JSON.stringify(newVal));
+      }
     }
   }
+
+  // beforeDestroy(){
+  //   this.$refs.add.$off('addTodo',this.addTodo)
+  // }
 };
 </script>
 
 <style scoped>
+.todo-container {
+  width: 600px;
+  margin: 0 auto;
+}
+.todo-container .todo-wrap {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
 </style>
