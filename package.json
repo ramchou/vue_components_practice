@@ -28,7 +28,10 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.10.1",
+    "axios": "^0.19.2",
     "pubsub-js": "^1.8.0",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-resource": "^1.5.1"
   }
 }

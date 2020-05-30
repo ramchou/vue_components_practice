@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import App from '@/App'
-import '@babel/polyfill'
 
 new Vue({
-    beforeCreate() {
+    beforeCreate() { 
         Vue.prototype.$bus = this
     },
     el: "#root",
