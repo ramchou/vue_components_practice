@@ -12,10 +12,11 @@
 </template>
 
 <script type="text/ecmascript-6">
+import Pubsub from "pubsub-js";
 export default {
   props: {
-    todos: Array,
-    chooseAll: Function
+    todos: Array
+    // chooseAll: Function
     // deleteFinished: Function // props通信方式
   },
   computed: {
@@ -30,7 +31,10 @@ export default {
         return this.finishedNum === this.totalNum && this.totalNum > 0;
       },
       set(val) {
-        this.chooseAll(val);
+        // this.chooseAll(val);
+
+        // 消息发布
+        Pubsub.publish("msg", val);
       }
     }
   },

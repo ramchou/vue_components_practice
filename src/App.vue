@@ -15,7 +15,9 @@
       <!-- props通信方式 -->
       <!-- <Footer :todos="todos" :chooseAll="chooseAll" :deleteFinished="deleteFinished" /> -->
       <!-- 全局事件总线通信方式 -->
-      <Footer :todos="todos" :chooseAll="chooseAll" />
+      <!-- <Footer :todos="todos" :chooseAll="chooseAll" /> -->
+      <!-- 消息订阅发布通信方式 -->
+      <Footer :todos="todos" />
     </div>
   </div>
 </template>
@@ -24,6 +26,7 @@
 import Header from "@/components/Header";
 import Main from "@/components/Main";
 import Footer from "@/components/Footer";
+import Pubsub from "pubsub-js";
 export default {
   components: {
     Header,
@@ -38,6 +41,9 @@ export default {
 
     // 全局事件总线通信方式
     this.$bus.$on("deleteFinished", this.deleteFinished);
+
+    // 通过消息订阅处理
+    Pubsub.subscribe('msg', this.chooseAll)
   },
 
   data() {
@@ -61,9 +67,18 @@ export default {
     deleteOne(index) {
       this.todos.splice(index, 1);
     },
-    chooseAll(val) {
+
+    // props通信方式
+    // chooseAll(val) {
+    //   this.todos.forEach(item => (item.done = val));
+    // },
+
+    // 订阅发布通信方式
+    chooseAll(msg, val) {
       this.todos.forEach(item => (item.done = val));
     },
+
+
     deleteFinished() {
       this.todos = this.todos.filter(item => !item.done);
     }
