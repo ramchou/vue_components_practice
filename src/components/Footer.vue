@@ -15,7 +15,7 @@
 export default {
   props: {
     todos: Array,
-    chooseAll: Function,
+    chooseAll: Function
     // deleteFinished: Function // props通信方式
   },
   computed: {
@@ -36,11 +36,11 @@ export default {
   },
   methods: {
     delFinished() {
-        // props通信方式
-    //   this.deleteFinished();
+      // props通信方式
+      //   this.deleteFinished();
 
-    // 全局事件总线通信方式
-    this.$bus.$emit('deleteFinished')
+      // 全局事件总线通信方式
+      this.$bus.$emit("deleteFinished");
     }
   }
 };

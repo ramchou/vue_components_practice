@@ -23,7 +23,6 @@ export default {
   props: ["addComment"],
   data() {
     return {
-      id: Date.now(),
       username: "",
       content: ""
     };
@@ -32,16 +31,14 @@ export default {
     addC() {
       if (this.username.trim() && this.content.trim()) {
         let obj = {
-          id: this.id,
+          id: Date.now(),
           username: this.username,
           content: this.content
         };
         this.addComment(obj);
       }
-      this.username = '',
-      this.content = ''
+      (this.username = ""), (this.content = "");
     }
-    
   }
 };
 </script>
