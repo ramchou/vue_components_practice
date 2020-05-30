@@ -6,5 +6,5 @@ new Vue({
         Vue.prototype.$bus = this
     },
     el: "#root",
-    render: h => h(App)
+    render:h => h(App)
 })
