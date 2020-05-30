@@ -68,12 +68,12 @@ export default {
       this.todos.splice(index, 1);
     },
 
-    // props通信方式
+    // props 通信方式
     // chooseAll(val) {
     //   this.todos.forEach(item => (item.done = val));
     // },
 
-    // 订阅发布通信方式
+    // 订阅发布 通信方式
     chooseAll(msg, val) {
       this.todos.forEach(item => (item.done = val));
     },
