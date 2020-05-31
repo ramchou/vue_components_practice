@@ -13,19 +13,18 @@
 
 <script type="text/ecmascript-6">
 export default {
-    props:["comment", "deleteComment", "index"],
-    methods:{
-        delComment(){
-            this.deleteComment(this.index);
-        }
+  props: ["comment", "deleteComment", "index"],
+  methods: {
+    delComment() {
+      this.deleteComment(this.index)
     }
+  }
 };
 </script>
 
 <style scoped>
-
 li {
-  transition: .5s;
+  transition: 0.5s;
   overflow: hidden;
 }
 
