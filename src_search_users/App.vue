@@ -2,7 +2,6 @@
   <div class="container">
    <Search></Search>
    <Main></Main>
-    
   </div>
 </template>
 
