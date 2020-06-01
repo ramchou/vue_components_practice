@@ -65,7 +65,14 @@ module.exports = {
     devServer: {
         port: 8080,
         open: true,
-        quiet: true
+        quiet: true,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:4000',
+                pathRewrite: { '^/api': '' },
+                changeOrigin: true
+            }
+        }
     },
 
     devtool: "cheap-module-eval-source-map",

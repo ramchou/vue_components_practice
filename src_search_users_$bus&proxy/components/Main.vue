@@ -70,7 +70,8 @@ export default {
       try {
         let response = await axios({
           method: "GET",
-          url: "https://api.github.com/search/users",
+          // url: "https://api.github.com/search/users",
+          url: "http://localhost:8080/api/user/info",
           params: {
             q: searchName
           }
