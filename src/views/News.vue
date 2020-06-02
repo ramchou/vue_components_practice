@@ -13,6 +13,9 @@
         >{{info.id}}</button>
       </li>
     </ul>
+
+    <button @click="$router.back()">GoBack</button>
+
     <div class="alert alert-success" role="alert">
       <router-view></router-view>
     </div>
