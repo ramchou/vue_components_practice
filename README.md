@@ -3,7 +3,7 @@
 
 3.src_todolist_props 使用 props 通信方式书写 todolist 案例<br>
 
-4.src*search_users*\$bus&proxy 使用全局事件总线通信方式书写 search_users 案例 + 尝试使用 proxy 代理<br>
+4.src search*users*\$bus&proxy 使用全局事件总线通信方式书写 search_users 案例 + 发送 ajax(结合 axios async await) + 尝试使用 proxy 代理<br>
 5.src_search-users_vuex 使用 vuex 通信方式改造 search_users 案例<br>
 
 6.src_counts_vuex 使用 vuex 通信方式书写 counts 案例<br>
